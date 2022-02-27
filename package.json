@@ -27,10 +27,7 @@
   "packageManager": "yarn@1.23.0-20220130.1630",
   "lint-staged": {
     "apps/**/*.{js,ts,jsx,tsx}": [
-      "eslint --fix"
-    ],
-    "packages/ui/**/*.{js,ts,jsx,tsx}": [
-      "eslint --fix"
+      "eslint"
     ],
     "*.json": [
       "prettier --write"
