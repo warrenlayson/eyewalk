@@ -6,4 +6,4 @@ app.get('/api', (_, res) => {
   res.send('Hello world')
 })
 
-export { app }
+export default app
