@@ -9,7 +9,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test-w": "jest --watchAll",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "jest": {
     "preset": "jest-expo"

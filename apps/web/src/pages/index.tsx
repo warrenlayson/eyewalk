@@ -1,10 +1,11 @@
+import React from 'react'
 import { Button } from 'ui'
 
-const Web = () => (
+const Index = () => (
   <div>
     <h1 className="text-3xl font-bold underline">Web</h1>
     <Button />
   </div>
 )
 
-export default Web
+export default Index
