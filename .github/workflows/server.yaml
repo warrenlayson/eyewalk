@@ -1,8 +1,11 @@
-name: root
+name: 'server'
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
+    paths:
+      - 'apps/server/**'
+      - '.github/workflows/server.yaml'
   pull_request:
     branches: [main]
 
@@ -22,5 +25,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - run: yarn build
-      - run: yarn test
+      - name: Build
+        working-directory: ./apps/server
+        run: yarn build
+      - name: Test
+        working-directory: ./apps/server
+        run: yarn test
