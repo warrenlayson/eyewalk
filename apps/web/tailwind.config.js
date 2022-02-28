@@ -13,8 +13,8 @@ module.exports = {
       },
     },
     fontFamily: {
-      Lora: ['Lora, serif'],
-      Montserrat: ['Montserrat, sans-serif'],
+      body: ['Lora, serif'],
+      header: ['Montserrat, sans-serif'],
     },
     container: {
       center: true,

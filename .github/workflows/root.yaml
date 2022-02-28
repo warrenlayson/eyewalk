@@ -34,17 +34,36 @@ jobs:
       JWT_TOKEN: asdfjlasldfjaslfkjasldfkjaskfas
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
           cache: 'yarn'
+          cache-dependency-path: yarn.lock
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup Expo and EAS
+        uses: expo/expo-github-action@v7
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EAS_TOKEN }}
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Build
+      - name: Build apps except for mobile
         run: yarn build
+      - name: Build mobile app
+        working-directory: ./apps/mobile
+        run: eas build --non-interactive --platform android
       - name: Migration
         run: yarn workspace server prisma db push
       - name: Test
         run: yarn test
+
+
+
+
