@@ -12,7 +12,7 @@ import {
 import { Button } from 'ui/Button'
 
 const Index = () => (
-  <div className="font-Lora">
+  <div className="font-body">
     <Head>
       <title>Eyewalk</title>
     </Head>
@@ -24,54 +24,30 @@ const Index = () => (
             <a>
               <Image
                 src="/EyeWalk_TextOnlyNoLogo_1.svg"
-                height={80}
-                width={200}
+                height={120}
+                width={300}
                 alt="Eyewalk logo"
               />
             </a>
           </Link>
         </div>
-        <ul className="items-center justify-end flex-1 hidden gap-12 text-sm uppercase sm:flex text-eyewalk-navy-blue">
-          <li className="cursor-pointer">Features</li>
-          <li className="cursor-pointer">Pricing</li>
-          <li className="cursor-pointer">Contact</li>
+        <div className="items-center justify-end flex-1 hidden gap-12 sm:flex">
+          <ul className="items-center gap-12 text-sm uppercase sm:flex text-eyewalk-navy-blue font-header">
+            <li className="cursor-pointer">Features</li>
+            <li className="cursor-pointer">Pricing</li>
+            <li className="cursor-pointer">Contact</li>
+          </ul>
           <button
             type="button"
             className="py-3 font-medium text-white uppercase rounded-md bg-eyewalk-black px-7"
           >
             Login
           </button>
-        </ul>
+        </div>
         <div className="flex justify-end flex-1 sm:hidden">
           <FaBars size="2em" />
         </div>
       </nav>
-      {/* <div className="flex items-center justify-between h-20 max-w-5xl px-4 py-4 mx-auto md:px-0">
-        <Link href="/">
-          <a>
-            <Image
-              src="/EyeWalk_TextOnlyNoLogo_1.svg"
-              height={80}
-              width={200}
-              alt="Eyewalk logo"
-            />
-          </a>
-        </Link>
-        <div className="hidden md:block">
-          <button type="button" className="px-3 py-2 mr-4 ">
-            Sign in
-          </button>
-          <button
-            type="button"
-            className="px-4 py-2 text-white bg-black rounded-xl"
-          >
-            Get Started
-          </button>
-        </div>
-        <div className="block p-4 md:hidden">
-          <FaBars size="2em" />
-        </div>
-      </div> */}
     </header>
 
     {/* Hero */}
@@ -79,7 +55,7 @@ const Index = () => (
       <div className="container flex flex-col-reverse items-center gap-12 lg:flex-row mt-14 lg:mt-28">
         {/* Content */}
         <div className="flex flex-col items-center flex-1 lg:items-start">
-          <h2 className="mb-6 text-3xl text-center font-Montserrat text-eyewalk-navy-blue md:text-4 lg:text-5xl lg:text-left">
+          <h2 className="mb-6 text-3xl text-center font-header text-eyewalk-navy-blue md:text-4 lg:text-5xl lg:text-left">
             header
           </h2>
           <p className="mb-6 text-lg text-center text-eyewalk-black lg:text-left">
@@ -106,7 +82,7 @@ const Index = () => (
     <section className="py-20 mt-20 bg-eyewalk-white lg:mt-60">
       {/* Heading */}
       <div className="px-2 mx-auto sm:w-3/4 lg:w-5/12">
-        <h2 className="text-3xl text-center font-Montserrat text-eyewalk-navy-blue">
+        <h2 className="text-3xl text-center font-header text-eyewalk-navy-blue">
           Features
         </h2>
         <p className="mt-4 text-center text-gray-500">
@@ -128,7 +104,7 @@ const Index = () => (
           </div>
           {/* Content */}
           <div className="flex flex-col items-center flex-1 lg:items-start">
-            <h2 className="text-3xl font-Montserrat text-eyewalk-navy-blue">
+            <h2 className="text-3xl font-header text-eyewalk-navy-blue">
               Feature 1
             </h2>
             <p className="my-4 text-center text-gray-500 lg:text-left sm:w-3/4 lg:w-full">
@@ -153,7 +129,7 @@ const Index = () => (
           </div>
           {/* Content */}
           <div className="flex flex-col items-center flex-1 lg:items-start">
-            <h2 className="text-3xl font-Montserrat text-eyewalk-navy-blue">
+            <h2 className="text-3xl font-header text-eyewalk-navy-blue">
               Feature 2
             </h2>
             <p className="my-4 text-center text-gray-500 lg:text-left sm:w-3/4 lg:w-full">
@@ -178,7 +154,7 @@ const Index = () => (
           </div>
           {/* Content */}
           <div className="flex flex-col items-center flex-1 lg:items-start">
-            <h2 className="text-3xl font-Montserrat text-eyewalk-navy-blue">
+            <h2 className="text-3xl font-header text-eyewalk-navy-blue">
               Feature 3
             </h2>
             <p className="my-4 text-center text-gray-500 lg:text-left sm:w-3/4 lg:w-full">
@@ -197,7 +173,7 @@ const Index = () => (
     <section className="py-20 mt-20">
       {/* Heading */}
       <div className="px-2 mx-auto sm:w-3/4 lg:w-5/12">
-        <h2 className="text-3xl text-center font-Montserrat text-eyewalk-navy-blue">
+        <h2 className="text-3xl text-center font-header text-eyewalk-navy-blue">
           Download
         </h2>
         <p className="mt-4 text-center text-gray-500">
@@ -218,7 +194,7 @@ const Index = () => (
               width={100}
               alt="Play store logo"
             />
-            <h3 className="mt-5 mb-2 text-lg font-Montserrat text-eyewalk-navy-blue">
+            <h3 className="mt-5 mb-2 text-lg font-header text-eyewalk-navy-blue">
               Play Store
             </h3>
             <p className="mb-2 font-light text-gray-500">
@@ -241,7 +217,7 @@ const Index = () => (
               width={100}
               alt="Apple store logo"
             />
-            <h3 className="mt-5 mb-2 text-lg font-Montserrat text-eyewalk-navy-blue">
+            <h3 className="mt-5 mb-2 text-lg font-header text-eyewalk-navy-blue">
               Apple Store
             </h3>
             <p className="mb-2 font-light text-gray-500">
@@ -262,7 +238,7 @@ const Index = () => (
     <section className="py-20 bg-eyewalk-white">
       <div className="container">
         <div className="px-2 mx-auto sm:w-3/4 lg:w-5/12">
-          <h2 className="text-3xl text-center font-Montserrat text-eyewalk-navy-blue">
+          <h2 className="text-3xl text-center font-header text-eyewalk-navy-blue">
             Frequently Asked Questions
           </h2>
           <p className="mt-4 text-center text-gray-500">
@@ -299,7 +275,7 @@ const Index = () => (
     <section className="py-20 text-eyewalk-black bg-eyewalk-yellow">
       <div className="container">
         <div className="mx-auto sm sm:w-3/4 lg:w-2/4">
-          <h2 className="text-3xl text-center font-Montserrat">
+          <h2 className="text-3xl text-center font-header">
             Stay up-to-date with what we&apos;re doing
           </h2>
           <div className="flex flex-col gap-6 mt-8 sm:flex-row">
@@ -325,11 +301,11 @@ const Index = () => (
         <div className="flex flex-wrap items-center justify-center flex-1 gap-12 md:justify-start">
           <Image
             src="/EyeWalk_TextOnlyNoLogo_1.svg"
-            height={80}
-            width={200}
+            height={120}
+            width={300}
             alt="Eyewalk Logo"
           />
-          <ul className="flex gap-12 text-sm text-white uppercase">
+          <ul className="flex gap-12 text-sm text-white uppercase font-header">
             <li className="cursor-pointer">Features</li>
             <li className="cursor-pointer">Pricing</li>
             <li className="cursor-pointer">Contact</li>
@@ -337,10 +313,18 @@ const Index = () => (
         </div>
         <ul className="flex gap-10 mt-12 text-2xl text-white md:mt-0">
           <li>
-            <FaTwitter />
+            <Link href="https://facebook.com">
+              <a target="_blank">
+                <FaTwitter />
+              </a>
+            </Link>
           </li>
           <li>
-            <FaFacebookSquare />
+            <Link href="https://facebook.com">
+              <a target="_blank">
+                <FaFacebookSquare />
+              </a>
+            </Link>
           </li>
         </ul>
       </div>
