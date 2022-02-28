@@ -49,7 +49,7 @@ jobs:
         run: yarn build
       - name: Migration
         working-directory: ./apps/server
-        run: yarn db:push
+        run: yarn prisma db push
       - name: Test
         working-directory: ./apps/server
         run: yarn test
