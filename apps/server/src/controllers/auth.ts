@@ -2,6 +2,7 @@ import { hash, verify } from 'argon2'
 import { RequestHandler } from 'express'
 import jwt from 'jsonwebtoken'
 import BadRequestError from '../errors/bad-request-error'
+import NotAuthorizedError from '../errors/not-authorized-error'
 import prisma from '../prisma'
 
 const login: RequestHandler = async (req, res) => {
@@ -10,13 +11,13 @@ const login: RequestHandler = async (req, res) => {
   const user = await prisma.user.findUnique({ where: { email } })
 
   if (!user) {
-    throw new BadRequestError('Invalid credentials')
+    throw new NotAuthorizedError()
   }
 
   const isMatch = await verify(user.password, password)
 
   if (!isMatch) {
-    throw new BadRequestError('Invalid credentials')
+    throw new NotAuthorizedError()
   }
 
   const userJwt = jwt.sign(
