@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage -i",
-    "build": "tsc",
-    "dev": "rm -rf dist && yarn build && nodemon ./dist/src/index.js",
+    "build": "yarn clean && tsc",
+    "clean": "rm -rf dist",
+    "dev": "yarn build &&  nodemon ./dist/src/index.js",
     "start": "./dist/src/index.js",
-    "lint": "eslint src --fix",
-    "test-w": "jest -i --watchAll"
+    "lint": "eslint src --fix"
   },
   "keywords": [],
   "author": "",
