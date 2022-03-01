@@ -22,9 +22,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#000e20"
       },
-      "package": "com.eyewalk.mobile"
+      "package": "app.vercel.eyewalk"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
