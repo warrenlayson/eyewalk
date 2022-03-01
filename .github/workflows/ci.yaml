@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [14.x]
 
     services:
       postgres:
@@ -44,6 +44,13 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: yarn.lock
           node-version: ${{ matrix.node-version }}
+
+      - name: 🏗 Setup Expo and EAS
+        uses: expo/expo-github-action@v7
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EAS_TOKEN }}
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
