@@ -1,6 +1,7 @@
-const base = require('../../jest.config')
 module.exports = {
-  ...base,
-  name: 'web',
-  displayName: 'Web Tests',
+  ...require('config/jest-next'),
+  rootDir: '.',
+  moduleNameMapper: {
+    '\\.module\\.css$': 'identity-obj-proxy',
+  },
 }

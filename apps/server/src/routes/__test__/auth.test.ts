@@ -3,6 +3,10 @@ import request from 'supertest'
 import app from '../../app'
 import prisma from '../../prisma'
 
+beforeAll(async () => {
+  await prisma.user.deleteMany()
+})
+
 afterEach(async () => {
   await prisma.user.deleteMany()
 })
