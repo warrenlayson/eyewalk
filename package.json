@@ -46,6 +46,7 @@
     ]
   },
   "dependencies": {
-    "dotenv-safe": "^8.2.0"
+    "dotenv-safe": "^8.2.0",
+    "react-hook-form": "^7.27.1"
   }
 }
