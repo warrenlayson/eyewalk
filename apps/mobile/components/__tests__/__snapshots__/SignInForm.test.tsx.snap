@@ -11,6 +11,76 @@ exports[`Sign in form should render correctly 1`] = `
         }
       }
     >
+      First Name
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      autoCorrect={false}
+      blurOnSubmit={false}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      rejectResponderTermination={true}
+      returnKeyType="next"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#f7f7f7",
+            "borderColor": "black",
+            "borderRadius": 4,
+            "height": 50,
+            "padding": 16,
+          },
+          undefined,
+        ]
+      }
+      underlineColorAndroid="transparent"
+    />
+  </View>
+  <View>
+    <Text
+      style={
+        Object {
+          "margin": 8,
+          "marginLeft": 0,
+        }
+      }
+    >
+      Last Name
+    </Text>
+    <TextInput
+      allowFontScaling={true}
+      autoCorrect={false}
+      blurOnSubmit={false}
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onSubmitEditing={[Function]}
+      rejectResponderTermination={true}
+      returnKeyType="next"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#f7f7f7",
+            "borderColor": "black",
+            "borderRadius": 4,
+            "height": 50,
+            "padding": 16,
+          },
+          undefined,
+        ]
+      }
+      underlineColorAndroid="transparent"
+    />
+  </View>
+  <View>
+    <Text
+      style={
+        Object {
+          "margin": 8,
+          "marginLeft": 0,
+        }
+      }
+    >
       Email
     </Text>
     <TextInput

@@ -46,7 +46,11 @@
     ]
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.8",
+    "@react-native-community/netinfo": "^8.1.0",
     "dotenv-safe": "^8.2.0",
-    "react-hook-form": "^7.27.1"
+    "react-hook-form": "^7.27.1",
+    "react-query": "^3.34.16",
+    "yup": "^0.32.11"
   }
 }

@@ -25,7 +25,7 @@ const Input = React.forwardRef<TextInput, InputProps>(
           onBlur={onBlur}
           {...rest}
         />
-        {error && <Text>{error}</Text>}
+        {error && <Text style={styles.error}>{error}</Text>}
       </View>
     )
   },
@@ -44,5 +44,8 @@ const styles = StyleSheet.create({
     height: 50,
     padding: 16,
     borderRadius: 4,
+  },
+  error: {
+    color: 'red',
   },
 })
