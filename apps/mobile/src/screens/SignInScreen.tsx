@@ -2,11 +2,13 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import Constants from 'expo-constants'
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import { useMutation, useQueryClient } from 'react-query'
 import Link from '../components/Link'
 import Logo from '../components/Logo'
 import SignInForm from '../components/SignInForm'
 import { Text, View } from '../components/Themed'
-import type { RootStackParamList } from '../types'
+import axios from '../lib/axios'
+import { LoginFormData, LoginResponse, RootStackParamList } from '../types'
 
 type SignInScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
@@ -14,6 +16,25 @@ type SignInScreenNavigationProp = NativeStackScreenProps<
 >
 
 const SignInScreen = ({ navigation }: SignInScreenNavigationProp) => {
+  const qc = useQueryClient()
+  const loginMutation = useMutation(
+    (data: LoginFormData) => axios.post('/api/auth/login', data),
+    {
+      onSuccess: async data => {
+        await qc.cancelQueries('me')
+
+        console.log(data.data)
+        qc.setQueryData<LoginResponse>('me', data.data)
+      },
+      onError: err => {
+        console.log(err)
+      },
+      onSettled: () => {
+        qc.invalidateQueries('me')
+      },
+    },
+  )
+
   const onForgotPassword = () => navigation.navigate('ForgotPassword')
   const onSignUp = () => navigation.navigate('SignUp')
   return (
@@ -24,7 +45,7 @@ const SignInScreen = ({ navigation }: SignInScreenNavigationProp) => {
 
       <SignInForm
         onForgotPassword={onForgotPassword}
-        onSignIn={a => console.log(a)}
+        onSignIn={formData => loginMutation.mutate(formData)}
       />
 
       <Text style={{ textAlign: 'center', marginVertical: 32 }}>or</Text>

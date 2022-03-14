@@ -6,16 +6,16 @@
 import { FontAwesome } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
-  NavigationContainer,
-  DefaultTheme,
   DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
 } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as React from 'react'
 import { ColorSchemeName, Pressable } from 'react-native'
-
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
+import useMe from '../hooks/useMe'
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen'
 import ModalScreen from '../screens/ModalScreen'
 import NotFoundScreen from '../screens/NotFoundScreen'
@@ -53,10 +53,12 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 
 function RootNavigator() {
   // Mock signed in
-  const [isSignedIn, setIsSignedIn] = React.useState(false)
+  const { data } = useMe()
+  console.log(data)
+
   return (
     <Stack.Navigator>
-      {isSignedIn ? (
+      {data ? (
         <>
           <Stack.Screen
             name="Root"

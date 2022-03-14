@@ -2,10 +2,10 @@ import { StatusBar } from 'expo-status-bar'
 import { AppStateStatus, Platform } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { focusManager, QueryClient, QueryClientProvider } from 'react-query'
-import useAppState from './hooks/useAppState'
-import useCachedResources from './hooks/useCachedResources'
-import useColorScheme from './hooks/useColorScheme'
-import Navigation from './navigation'
+import useAppState from './src/hooks/useAppState'
+import useCachedResources from './src/hooks/useCachedResources'
+import useColorScheme from './src/hooks/useColorScheme'
+import Navigation from './src/navigation'
 
 function onAppStateChange(status: AppStateStatus) {
   if (Platform.OS !== 'web') {

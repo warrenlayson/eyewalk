@@ -1,8 +1,10 @@
 import { RequestHandler } from 'express'
 import jwt from 'jsonwebtoken'
+import exclude from '../lib/exlude'
+import prisma from '../prisma'
 import { UserPayload } from '../typings'
 
-const currentUser: RequestHandler = (req, _, next) => {
+const currentUser: RequestHandler = async (req, _, next) => {
   if (!req.session?.jwt) {
     return next()
   }
@@ -13,7 +15,16 @@ const currentUser: RequestHandler = (req, _, next) => {
       process.env.JWT_TOKEN!,
     ) as UserPayload
 
-    req.currentUser = payload
+    const user = await prisma.user.findUnique({
+      where: {
+        id: Number(payload.id),
+      },
+    })
+    if (!user) {
+      return next()
+    }
+    const userWithoutPassword = exclude(user, 'password')
+    req.currentUser = userWithoutPassword
   } catch (err) {
     console.error(err)
   }

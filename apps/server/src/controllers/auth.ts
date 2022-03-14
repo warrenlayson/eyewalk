@@ -3,6 +3,7 @@ import { RequestHandler } from 'express'
 import jwt from 'jsonwebtoken'
 import BadRequestError from '../errors/bad-request-error'
 import NotAuthorizedError from '../errors/not-authorized-error'
+import exclude from '../lib/exlude'
 import prisma from '../prisma'
 
 const login: RequestHandler = async (req, res) => {
@@ -31,8 +32,9 @@ const login: RequestHandler = async (req, res) => {
   req.session = {
     jwt: userJwt,
   }
+  const userWithoutPassword = exclude(user, 'password')
 
-  res.send(user)
+  res.send(userWithoutPassword)
 }
 
 const register: RequestHandler = async (req, res) => {
@@ -53,12 +55,6 @@ const register: RequestHandler = async (req, res) => {
       lastName,
       password: await hash(password),
     },
-    select: {
-      email: true,
-      firstName: true,
-      lastName: true,
-      id: true,
-    },
   })
 
   const userJwt = jwt.sign(
@@ -73,7 +69,9 @@ const register: RequestHandler = async (req, res) => {
     jwt: userJwt,
   }
 
-  res.status(201).send(user)
+  const userWithoutPassword = exclude(user, 'password')
+
+  res.status(201).send(userWithoutPassword)
 }
 
 const logout: RequestHandler = (req, res) => {
@@ -82,7 +80,7 @@ const logout: RequestHandler = (req, res) => {
 }
 
 const me: RequestHandler = (req, res) => {
-  res.send({ currentUser: req.currentUser })
+  res.send(req.currentUser)
 }
 
 export { login, register, logout, me }

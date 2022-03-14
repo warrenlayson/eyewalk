@@ -1,3 +1,4 @@
+import { User } from '@prisma/client'
 import 'cookie-session'
 
 declare module 'cookie-session' {
@@ -13,6 +14,6 @@ export interface UserPayload {
 
 declare module 'express-serve-static-core' {
   interface Request {
-    currentUser?: UserPayload
+    currentUser?: Omit<User, 'password'>
   }
 }

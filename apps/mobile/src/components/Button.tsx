@@ -1,10 +1,10 @@
+import React from 'react'
 import {
   NativeSyntheticEvent,
   NativeTouchEvent,
   StyleSheet,
   TouchableHighlight,
 } from 'react-native'
-import React from 'react'
 import Colors from '../constants/Colors'
 import { Text, View } from './Themed'
 

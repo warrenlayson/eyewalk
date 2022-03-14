@@ -1,24 +1,14 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { StyleSheet, TextInput, View } from 'react-native'
 import * as yup from 'yup'
+import { RegisterFormData } from '../types'
 import Button from './Button'
 import Input from './Input'
-import Link from './Link'
 
-type SignInFormProps = {
-  onSignIn: (a: FormData) => void
-  onForgotPassword: () => void
+type SignUpFormProps = {
+  onSignUp: (a: RegisterFormData) => void
 }
-
-type FormData = {
-  email: string
-  password: string
-  firstName: string
-  lastName: string
-}
-
 const schema = yup.object({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
@@ -26,21 +16,20 @@ const schema = yup.object({
   password: yup.string().min(6).required(),
 })
 
-const SignInForm = ({ onSignIn, onForgotPassword }: SignInFormProps) => {
+const SignUpForm = ({ onSignUp }: SignUpFormProps) => {
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({
-    resolver: yupResolver(schema),
+  } = useForm<RegisterFormData>()
+
+  const passwordRef = React.useRef<TextInput | null>(null)
+  const onSubmit = handleSubmit(data => {
+    onSignUp(data)
   })
 
   const lastNameRef = React.useRef<TextInput | null>(null)
   const emailRef = React.useRef<TextInput | null>(null)
-  const passwordRef = React.useRef<TextInput | null>(null)
-  const onSubmit = handleSubmit(data => {
-    onSignIn(data)
-  })
   return (
     <View>
       <Input
@@ -68,8 +57,7 @@ const SignInForm = ({ onSignIn, onForgotPassword }: SignInFormProps) => {
         label="Email"
         control={control}
         name="email"
-        ref={emailRef}
-        error={errors.email?.message}
+        error={errors.email && 'This is required'}
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}
@@ -82,22 +70,19 @@ const SignInForm = ({ onSignIn, onForgotPassword }: SignInFormProps) => {
         control={control}
         name="password"
         secureTextEntry
-        error={errors.password?.message}
         autoCapitalize="none"
         autoCorrect={false}
         ref={passwordRef}
         onSubmitEditing={onSubmit}
       />
 
-      <View style={{ marginVertical: 16 }}>
-        <Link onPress={onForgotPassword}>Forgot your Password?</Link>
+      <View style={{ marginVertical: 32 }}>
+        <Button title="Login" onPress={onSubmit} disabled={isSubmitting} />
       </View>
-
-      <Button title="Login" onPress={onSubmit} disabled={isSubmitting} />
     </View>
   )
 }
 
-export default SignInForm
+export default SignUpForm
 
 const styles = StyleSheet.create({})
