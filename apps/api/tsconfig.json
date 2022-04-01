@@ -8,6 +8,6 @@
     "esModuleInterop": true,
     "rootDir": "."
   },
-  "include": ["src", "test/**/*.ts", "prisma/**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", ".turbo", "coverage"]
 }

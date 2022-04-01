@@ -14,9 +14,9 @@
     "docker:down": "docker-compose -f ../../docker-compose.yml -f ../../docker-compose.test.yml down",
     "pretest": "eslint && yarn docker:up &&  yarn migrate:test",
     "test": "jest --coverage -i",
-    "start": "npm run build && fastify start -l info dist/app.js",
+    "start": "npm run build && fastify start -l info dist/src/app.js",
     "build": "tsc",
-    "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"tsc -w\" \"fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js\"",
+    "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"tsc -w\" \"fastify start --ignore-watch=.ts$ -w -l info -P dist/src/app.js\"",
     "lint": "eslint src --fix",
     "migrate:test": "dotenv -e .env.test  -- yarn prisma migrate deploy"
   },

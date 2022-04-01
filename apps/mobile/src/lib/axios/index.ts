@@ -1,7 +1,7 @@
 import _axios from 'axios'
 
 const axios = _axios.create({
-  baseURL: 'https://black-tiger-24.loca.lt',
+  baseURL: 'https://tough-mole-46.loca.lt',
   withCredentials: true,
 })
 

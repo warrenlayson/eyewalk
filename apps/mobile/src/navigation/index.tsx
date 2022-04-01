@@ -18,6 +18,7 @@ import useColorScheme from '../hooks/useColorScheme'
 import useMe from '../hooks/useMe'
 import useRefreshOnFocus from '../hooks/useRefreshOnFocus'
 import DashboardScreen from '../screens/DashboardScreen'
+import EditProfileScreen from '../screens/EditProfileScreen'
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen'
 import ModalScreen from '../screens/ModalScreen'
 import NotFoundScreen from '../screens/NotFoundScreen'
@@ -75,6 +76,13 @@ function RootNavigator() {
             options={{ headerShown: false }}
           />
           <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen
+            name="EditProfile"
+            component={EditProfileScreen}
+            options={() => ({
+              title: 'Edit Profile',
+            })}
+          />
           <Stack.Screen
             name="NotFound"
             component={NotFoundScreen}

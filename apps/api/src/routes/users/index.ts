@@ -1,11 +1,8 @@
 import { FastifyPluginAsync } from 'fastify'
+import updateUser from './update-user'
 
 const users: FastifyPluginAsync = async (fastify): Promise<void> => {
-  fastify.get('/users', async (_, reply) => {
-    reply.send({
-      message: 'Hello World',
-    })
-  })
+  fastify.register(updateUser)
 }
 
 export default users

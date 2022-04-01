@@ -1,8 +1,8 @@
-import type { LoginResponseType } from 'api/src/routes/auth/login'
+import type { CurrentUserType } from 'api/src/routes/auth/current-user'
 import { useQuery } from 'react-query'
 import axios from '../lib/axios'
 
-const me = (): Promise<LoginResponseType> =>
+const me = (): Promise<CurrentUserType> =>
   axios.get('/auth/me').then(res => res.data)
 
 export default function useMe() {

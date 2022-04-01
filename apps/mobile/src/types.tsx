@@ -25,6 +25,7 @@ export type RootStackParamList = {
   ForgotPassword: undefined
   Settings: undefined
   EditProfile: undefined
+  SettingsChangePassword: undefined
 }
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

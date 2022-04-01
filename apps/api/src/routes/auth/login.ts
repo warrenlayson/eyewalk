@@ -42,15 +42,15 @@ const login: FastifyPluginAsync = async fastify => {
         return reply.unauthorized('Invalid credentials')
       }
 
-      const isMatch = await this.argon2.verify(user?.password, password)
+      const isMatch = await this.argon2.verify(user.password, password)
       if (!isMatch) {
         return reply.unauthorized('Invalid credentials')
       }
 
-      const userWithoutPass = this.exclude(user, 'password')
+      // const userWithoutPass = this.exclude(user, 'password')
 
       request.session.user = user.id
-      return reply.replyUser(userWithoutPass)
+      return reply.send(user)
     },
   )
 }

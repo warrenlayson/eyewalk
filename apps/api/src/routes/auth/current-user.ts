@@ -5,7 +5,7 @@ import { UserNoPassword } from '../users/types'
 
 const CurrentUser = UserNoPassword
 
-type CurrentUserType = Static<typeof CurrentUser>
+export type CurrentUserType = Static<typeof CurrentUser>
 
 const currentUser: FastifyPluginAsync = async (fastify): Promise<void> => {
   fastify.register(fastifyAuth).after(() => {

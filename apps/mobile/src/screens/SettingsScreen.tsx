@@ -5,6 +5,7 @@ import Button from '../components/Button'
 import { Text, View } from '../components/Themed'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
+import { RootStackParamList, RootStackScreenProps } from '../types'
 
 type ListItemDataBasics = {
   title: string
@@ -14,7 +15,7 @@ type ListItemDataBasics = {
 type ListItemDataNavigation = ListItemDataBasics & {
   name: React.ComponentProps<typeof FontAwesome>['name']
   type: 'Navigation'
-  onPress: () => void
+  navigateTo: keyof RootStackParamList
 }
 
 type ListItemDataToggle = ListItemDataBasics & {
@@ -30,7 +31,7 @@ type ListItem = {
   data: ListItemData[]
 }
 
-const SettingsScreen = () => {
+const SettingsScreen = ({ navigation }: RootStackScreenProps<'Settings'>) => {
   const colorScheme = useColorScheme()
   const [sections, setSections] = React.useState<ListItem[]>([
     {
@@ -39,14 +40,14 @@ const SettingsScreen = () => {
         {
           title: 'Edit Profile',
           name: 'chevron-right',
-          onPress: () => {},
           type: 'Navigation',
+          navigateTo: 'EditProfile',
         },
         {
           title: 'Change Password',
           name: 'chevron-right',
-          onPress: () => {},
           type: 'Navigation',
+          navigateTo: 'SettingsChangePassword',
         },
       ],
       name: 'user-o',
@@ -88,7 +89,7 @@ const SettingsScreen = () => {
           item.type === 'Navigation' ? (
             <TouchableOpacity
               style={{ paddingVertical: 10 }}
-              onPress={item.onPress}
+              onPress={() => navigation.navigate(item.navigateTo)}
             >
               <View
                 style={{
