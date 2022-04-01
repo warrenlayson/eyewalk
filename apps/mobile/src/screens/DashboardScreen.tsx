@@ -1,3 +1,4 @@
+import React from 'react'
 import { StyleSheet } from 'react-native'
 import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
@@ -33,5 +34,10 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: '80%',
+  },
+  headerButtons: {
+    padding: 10,
+    borderColor: '#121212',
+    borderWidth: 1,
   },
 })

@@ -1,44 +1,49 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { LoginResponseType, LoginType } from 'api/src/routes/auth/login'
 import Constants from 'expo-constants'
 import React from 'react'
-import { ActivityIndicator, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
+import Spinner from 'react-native-loading-spinner-overlay/lib'
 import { useMutation, useQueryClient } from 'react-query'
 import Link from '../components/Link'
 import Logo from '../components/Logo'
 import SignInForm from '../components/SignInForm'
 import { Text, View } from '../components/Themed'
 import axios from '../lib/axios'
-import { LoginFormData, LoginResponse, RootStackParamList } from '../types'
+import { RootStackParamList } from '../types'
 
 type SignInScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'SignIn'
 >
 
+const postLogin = (data: LoginType): Promise<LoginResponseType> =>
+  axios.post('/auth/login', data).then(data => data.data)
+
 const SignInScreen = ({ navigation }: SignInScreenNavigationProp) => {
   const qc = useQueryClient()
-  const loginMutation = useMutation(
-    (data: LoginFormData) => axios.post('/auth/login', data),
-    {
-      onSuccess: async data => {
-        await qc.cancelQueries('me')
-
-        console.log(data.data)
-        qc.setQueryData<LoginResponse>('me', data.data)
-      },
-      onError: err => {
-        console.log(err)
-      },
-      onSettled: () => {
-        qc.invalidateQueries('me')
-      },
+  const loginMutation = useMutation(postLogin, {
+    onSuccess: async data => {
+      await qc.cancelQueries('me')
+      qc.setQueryData<LoginResponseType>('me', data)
     },
-  )
+    onError: err => {
+      console.log(err)
+    },
+    onSettled: () => {
+      qc.invalidateQueries('me')
+    },
+  })
 
   const onForgotPassword = () => navigation.navigate('ForgotPassword')
   const onSignUp = () => navigation.navigate('SignUp')
   return (
     <View style={styles.container}>
+      <Spinner
+        visible={true}
+        textContent={'Loading...'}
+        textStyle={{ color: '#FFF' }}
+      />
       <View style={{ alignSelf: 'center' }}>
         <Logo />
       </View>
@@ -47,20 +52,6 @@ const SignInScreen = ({ navigation }: SignInScreenNavigationProp) => {
         onForgotPassword={onForgotPassword}
         onSignIn={formData => loginMutation.mutate(formData)}
       />
-
-      {loginMutation.isLoading ? (
-        <ActivityIndicator
-          style={{
-            position: 'absolute',
-            top: Constants.statusBarHeight,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        />
-      ) : null}
 
       <Text style={{ textAlign: 'center', marginVertical: 32 }}>or</Text>
 
