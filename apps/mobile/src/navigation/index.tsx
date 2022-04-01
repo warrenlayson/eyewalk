@@ -24,6 +24,7 @@ import NotFoundScreen from '../screens/NotFoundScreen'
 import NotificationScreen from '../screens/NotificationScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import SearchScreen from '../screens/SearchScreen'
+import SettingsScreen from '../screens/SettingsScreen'
 import SignInScreen from '../screens/SignInScreen'
 import SignUpScreen from '../screens/SignUpScreen'
 import {
@@ -73,6 +74,7 @@ function RootNavigator() {
             component={BottomTabNavigator}
             options={{ headerShown: false }}
           />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
           <Stack.Screen
             name="NotFound"
             component={NotFoundScreen}
@@ -167,10 +169,25 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Profile"
         component={ProfileScreen}
-        options={{
+        options={({ navigation }: RootTabScreenProps<'Profile'>) => ({
           title: 'Profile',
           tabBarIcon: ({ color }) => <TabBarIcon name="user-o" color={color} />,
-        }}
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('Settings')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <FontAwesome
+                name="gear"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginRight: 15 }}
+              />
+            </Pressable>
+          ),
+        })}
       />
     </BottomTab.Navigator>
   )

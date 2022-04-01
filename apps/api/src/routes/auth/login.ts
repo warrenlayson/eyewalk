@@ -12,11 +12,11 @@ const Login = Type.Object(
   { additionalProperties: false },
 )
 
-type LoginType = Static<typeof Login>
+export type LoginType = Static<typeof Login>
 
 const LoginResponse = UserNoPassword
 
-type LoginResponseType = Static<typeof LoginResponse>
+export type LoginResponseType = Static<typeof LoginResponse>
 
 const login: FastifyPluginAsync = async fastify => {
   fastify.post<{

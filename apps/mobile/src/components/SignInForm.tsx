@@ -1,15 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import type { LoginType } from 'api/src/routes/auth/login'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { StyleSheet, TextInput, View } from 'react-native'
 import * as yup from 'yup'
-import { LoginFormData } from '../types'
 import Button from './Button'
 import Input from './Input'
 import Link from './Link'
 
 type SignInFormProps = {
-  onSignIn: (a: LoginFormData) => void
+  onSignIn: (a: LoginType) => void
   onForgotPassword: () => void
 }
 
@@ -23,7 +23,7 @@ const SignInForm = ({ onSignIn, onForgotPassword }: SignInFormProps) => {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginFormData>({
+  } = useForm<LoginType>({
     resolver: yupResolver(schema),
   })
 

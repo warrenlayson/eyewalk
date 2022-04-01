@@ -8,7 +8,7 @@ const RegisterBody = Type.Object({
   password: Type.String({ minLength: 6 }),
 })
 
-type RegisterBodyType = Static<typeof RegisterBody>
+export type RegisterBodyType = Static<typeof RegisterBody>
 
 const register: FastifyPluginAsync = async fastify => {
   fastify.post<{

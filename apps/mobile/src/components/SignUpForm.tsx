@@ -1,13 +1,13 @@
+import type { RegisterBodyType } from 'api/src/routes/auth/register'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { StyleSheet, TextInput, View } from 'react-native'
 import * as yup from 'yup'
-import { RegisterFormData } from '../types'
 import Button from './Button'
 import Input from './Input'
 
 type SignUpFormProps = {
-  onSignUp: (a: RegisterFormData) => void
+  onSignUp: (a: RegisterBodyType) => void
 }
 const schema = yup.object({
   firstName: yup.string().required(),
@@ -21,7 +21,7 @@ const SignUpForm = ({ onSignUp }: SignUpFormProps) => {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<RegisterFormData>()
+  } = useForm<RegisterBodyType>()
 
   const passwordRef = React.useRef<TextInput | null>(null)
   const onSubmit = handleSubmit(data => {

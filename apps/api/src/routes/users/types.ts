@@ -14,6 +14,8 @@ export const User = Type.Object(
     password: Type.String({
       description: 'The user password',
     }),
+    firstName: Type.String({ minLength: 1, maxLength: 70 }),
+    lastName: Type.String({ minLength: 1, maxLength: 70 }),
   },
   { additionalProperties: false },
 )
