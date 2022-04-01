@@ -5,6 +5,7 @@ import { focusManager, QueryClient, QueryClientProvider } from 'react-query'
 import useAppState from './src/hooks/useAppState'
 import useCachedResources from './src/hooks/useCachedResources'
 import useColorScheme from './src/hooks/useColorScheme'
+import { useOnlineManager } from './src/hooks/useOnlineManager'
 import Navigation from './src/navigation'
 
 function onAppStateChange(status: AppStateStatus) {
@@ -20,6 +21,7 @@ const queryClient = new QueryClient({
 export default function App() {
   const isLoadingComplete = useCachedResources()
   const colorScheme = useColorScheme()
+  useOnlineManager()
 
   useAppState(onAppStateChange)
 

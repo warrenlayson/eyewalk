@@ -36,7 +36,7 @@
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
   },
-  "packageManager": "yarn@1.23.0-20220130.1630",
+  "packageManager": "yarn@1.22.18",
   "lint-staged": {
     "apps/**/*.{js,ts,jsx,tsx}": [
       "eslint"
@@ -44,15 +44,5 @@
     "*.json": [
       "prettier --write"
     ]
-  },
-  "dependencies": {
-    "@hookform/resolvers": "^2.8.8",
-    "@react-native-community/netinfo": "^8.1.0",
-    "axios": "^0.26.1",
-    "dotenv-safe": "^8.2.0",
-    "expo-secure-store": "^11.1.1",
-    "react-hook-form": "^7.27.1",
-    "react-query": "^3.34.16",
-    "yup": "^0.32.11"
   }
 }

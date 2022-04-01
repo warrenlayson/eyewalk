@@ -1,7 +1,7 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import Constants from 'expo-constants'
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { ActivityIndicator, StyleSheet } from 'react-native'
 import { useMutation, useQueryClient } from 'react-query'
 import Link from '../components/Link'
 import Logo from '../components/Logo'
@@ -18,7 +18,7 @@ type SignInScreenNavigationProp = NativeStackScreenProps<
 const SignInScreen = ({ navigation }: SignInScreenNavigationProp) => {
   const qc = useQueryClient()
   const loginMutation = useMutation(
-    (data: LoginFormData) => axios.post('/api/auth/login', data),
+    (data: LoginFormData) => axios.post('/auth/login', data),
     {
       onSuccess: async data => {
         await qc.cancelQueries('me')
@@ -47,6 +47,20 @@ const SignInScreen = ({ navigation }: SignInScreenNavigationProp) => {
         onForgotPassword={onForgotPassword}
         onSignIn={formData => loginMutation.mutate(formData)}
       />
+
+      {loginMutation.isLoading ? (
+        <ActivityIndicator
+          style={{
+            position: 'absolute',
+            top: Constants.statusBarHeight,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        />
+      ) : null}
 
       <Text style={{ textAlign: 'center', marginVertical: 32 }}>or</Text>
 

@@ -16,13 +16,16 @@ import { ColorSchemeName, Pressable } from 'react-native'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
 import useMe from '../hooks/useMe'
+import useRefreshOnFocus from '../hooks/useRefreshOnFocus'
+import DashboardScreen from '../screens/DashboardScreen'
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen'
 import ModalScreen from '../screens/ModalScreen'
 import NotFoundScreen from '../screens/NotFoundScreen'
+import NotificationScreen from '../screens/NotificationScreen'
+import ProfileScreen from '../screens/ProfileScreen'
+import SearchScreen from '../screens/SearchScreen'
 import SignInScreen from '../screens/SignInScreen'
 import SignUpScreen from '../screens/SignUpScreen'
-import TabOneScreen from '../screens/TabOneScreen'
-import TabTwoScreen from '../screens/TabTwoScreen'
 import {
   RootStackParamList,
   RootTabParamList,
@@ -53,8 +56,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 
 function RootNavigator() {
   // Mock signed in
-  const { data } = useMe()
+  const { data, refetch } = useMe()
+
+  useRefreshOnFocus(refetch)
+
   console.log(data)
+
+  // const [data] = React.useState(false)
 
   return (
     <Stack.Navigator>
@@ -112,17 +120,17 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Dashboard"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        name="Dashboard"
+        component={DashboardScreen}
+        options={({ navigation }: RootTabScreenProps<'Dashboard'>) => ({
+          title: 'Dashboard',
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -141,11 +149,27 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Search"
+        component={SearchScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Search',
+          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Notification"
+        component={NotificationScreen}
+        options={{
+          title: 'Notification',
+          tabBarIcon: ({ color }) => <TabBarIcon name="bell-o" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color }) => <TabBarIcon name="user-o" color={color} />,
         }}
       />
     </BottomTab.Navigator>

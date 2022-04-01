@@ -4,7 +4,7 @@ module.exports = {
     node: true,
   },
   extends: [
-    'next',
+    'next/core-web-vitals',
     'airbnb',
     'airbnb-typescript',
     'plugin:import/recommended',

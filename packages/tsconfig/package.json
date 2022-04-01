@@ -8,5 +8,8 @@
     "nextjs.json",
     "react-library.json",
     "server.json"
-  ]
+  ],
+  "dependencies": {
+    "fastify-tsconfig": "^1.0.1"
+  }
 }

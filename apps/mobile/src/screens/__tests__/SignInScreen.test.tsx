@@ -1,4 +1,5 @@
-import { fireEvent, render } from '@testing-library/react-native'
+import { fireEvent } from '@testing-library/react-native'
+import { render } from '../../test/wrapper'
 import SignInScreen from '../SignInScreen'
 const createTestProps = (props: Object) => ({
   navigation: {

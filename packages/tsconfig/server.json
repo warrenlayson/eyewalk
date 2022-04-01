@@ -3,7 +3,8 @@
   "display": "Server",
   "extends": "./base.json",
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2018",
+    "lib": ["ES2018"],
     "noEmit": false,
     "module": "commonjs",
     "sourceMap": true

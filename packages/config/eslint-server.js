@@ -31,12 +31,19 @@ module.exports = {
       },
     },
   },
+  rules: {
+    'no-underscore-dangle': ['off'],
+  },
   overrides: [
     {
       env: {
         jest: true,
       },
-      files: ['**/__tests__/**/*.[jt]s', '**/?(*.)+(spec|test).[jt]s'],
+      files: [
+        '**/__tests__/**/*.[jt]s',
+        '**/?(*.)+(spec|test).[jt]s',
+        '**/tests/**/*.[jt]s',
+      ],
       extends: ['plugin:jest/recommended'],
       rules: {
         'import/no-extraneous-dependencies': [

@@ -1,0 +1,13 @@
+# Set the version of docker compose to use
+version: '3.9'
+
+# The containers that compose the project
+services:
+  db:
+    container_name: eyewalk-postgres-test
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_DB=tests
+  cache:
+    container_name: eyewalk-redis-test
