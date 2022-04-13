@@ -1,10 +1,12 @@
 import { FontAwesome } from '@expo/vector-icons'
 import React from 'react'
 import { SectionList, StyleSheet, Switch, TouchableOpacity } from 'react-native'
+import { useMutation, useQueryClient } from 'react-query'
 import Button from '../components/Button'
 import { Text, View } from '../components/Themed'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
+import axios from '../lib/axios'
 import { RootStackParamList, RootStackScreenProps } from '../types'
 
 type ListItemDataBasics = {
@@ -31,8 +33,17 @@ type ListItem = {
   data: ListItemData[]
 }
 
+const logout = async (): Promise<Boolean> =>
+  axios.delete('/auth/logout').then(data => data.data)
+
 const SettingsScreen = ({ navigation }: RootStackScreenProps<'Settings'>) => {
   const colorScheme = useColorScheme()
+  const qc = useQueryClient()
+  const logoutMutation = useMutation(logout, {
+    onSettled: () => {
+      qc.invalidateQueries()
+    },
+  })
   const [sections, setSections] = React.useState<ListItem[]>([
     {
       title: 'Account',
@@ -145,7 +156,7 @@ const SettingsScreen = ({ navigation }: RootStackScreenProps<'Settings'>) => {
         keyExtractor={(item, index) => index + ''}
       />
 
-      <Button title="Logout" onPress={() => {}} />
+      <Button title="Logout" onPress={() => logoutMutation.mutate()} />
     </View>
   )
 }

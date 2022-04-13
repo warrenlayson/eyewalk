@@ -37,6 +37,7 @@ exports[`Sign in form should render correctly 1`] = `
         ]
       }
       underlineColorAndroid="transparent"
+      value=""
     />
   </View>
   <View>
@@ -72,6 +73,7 @@ exports[`Sign in form should render correctly 1`] = `
         ]
       }
       underlineColorAndroid="transparent"
+      value=""
     />
   </View>
   <View
@@ -107,14 +109,22 @@ exports[`Sign in form should render correctly 1`] = `
   </View>
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
   >
     <View
       style={
@@ -124,10 +134,12 @@ exports[`Sign in form should render correctly 1`] = `
           },
           Object {
             "backgroundColor": "#ffde59",
-            "borderRadius": 4,
+            "borderRadius": 10,
             "fontWeight": "500",
-            "height": 50,
             "justifyContent": "center",
+            "minHeight": 48,
+            "minWidth": 48,
+            "padding": 10,
           },
         ]
       }
@@ -140,8 +152,10 @@ exports[`Sign in form should render correctly 1`] = `
             },
             Array [
               Object {
-                "color": "#121212",
                 "textAlign": "center",
+              },
+              Object {
+                "color": "#121212",
               },
             ],
           ]

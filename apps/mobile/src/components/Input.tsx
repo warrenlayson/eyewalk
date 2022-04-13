@@ -10,9 +10,10 @@ type InputProps = {
 } & TextInputProps
 
 const Input = React.forwardRef<TextInput, InputProps>(
-  ({ label, error, control, name, style, ...rest }: InputProps, ref) => {
+  ({ label, control, name, style, ...rest }: InputProps, ref) => {
     const {
       field: { onChange, onBlur, value },
+      fieldState: { error },
     } = useController({ control, name })
     return (
       <View>
@@ -25,7 +26,7 @@ const Input = React.forwardRef<TextInput, InputProps>(
           onBlur={onBlur}
           {...rest}
         />
-        {error && <Text style={styles.error}>{error}</Text>}
+        {error && <Text style={styles.error}>{error.message}</Text>}
       </View>
     )
   },

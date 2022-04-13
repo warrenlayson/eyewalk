@@ -25,6 +25,10 @@ const SignInForm = ({ onSignIn, onForgotPassword }: SignInFormProps) => {
     formState: { errors, isSubmitting },
   } = useForm<LoginType>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   })
 
   const passwordRef = React.useRef<TextInput | null>(null)

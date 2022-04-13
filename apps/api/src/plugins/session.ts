@@ -36,6 +36,6 @@ export default fp(
 
 declare module 'fastify' {
   interface Session {
-    user: number
+    user: string
   }
 }

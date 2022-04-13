@@ -6,8 +6,9 @@
     "strict": true,
     "lib": ["ESNext"],
     "esModuleInterop": true,
-    "rootDir": "."
+    "rootDir": ".",
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src", "generated/**/*.d.ts"],
   "exclude": ["node_modules", "dist", ".turbo", "coverage"]
 }

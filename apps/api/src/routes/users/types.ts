@@ -3,8 +3,9 @@ import { Static, Type } from '@sinclair/typebox'
 
 export const User = Type.Object(
   {
-    id: Type.Number({
+    id: Type.String({
       description: 'The user id',
+      format: 'uuid',
     }),
     email: Type.String({
       description: 'The user email',
@@ -24,3 +25,7 @@ export type UserType = Static<typeof User>
 export const UserNoPassword = Type.Omit(User, ['password'])
 
 export type UserWithoutPasswordType = Static<typeof UserNoPassword>
+
+export const GetUsers = Type.Array(UserNoPassword)
+
+export type GetUsersType = Static<typeof GetUsers>

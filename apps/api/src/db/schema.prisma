@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator jsonSchema {
+  provider = "prisma-json-schema-generator"
+  output   = "../generated"
+}
+
+model User {
+  id        String   @id @default(uuid()) @db.Uuid
+  firstName String   @db.VarChar(70)
+  lastName  String   @db.VarChar(70)
+  email     String   @unique @db.VarChar(70)
+  password  String   @db.Text
+  role      Role     @default(Customer)
+  Device    Device[]
+}
+
+enum Role {
+  Admin
+  Customer
+}
+
+model DeviceMetadata {
+  id           String    @id @default(uuid()) @db.Uuid
+  latitude     Float
+  longitude    Float
+  pulse        Int
+  batteryLevel Int
+  responseTime Int
+  device       Device?
+  caneUser     CaneUser?
+
+  createdAt DateTime @default(now()) @db.Timestamp
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp
+}
+
+model CaneUser {
+  id               String @id @default(uuid()) @db.Uuid
+  firstName        String @db.VarChar(70)
+  lastName         String @db.VarChar(70)
+  deviceMetadataId String @unique @db.Uuid
+
+  DeviceMetadata DeviceMetadata @relation(fields: [deviceMetadataId], references: [id])
+}
+
+model Device {
+  id               String         @id @default(uuid()) @db.Uuid
+  description      String         @db.Text
+  bounded          Boolean        @default(false) @db.Boolean
+  owner            User?          @relation(fields: [ownerId], references: [id])
+  metadata         DeviceMetadata @relation(fields: [deviceMetadataId], references: [id])
+  ownerId          String?        @db.Uuid
+  deviceMetadataId String         @unique @db.Uuid
+}

@@ -23,15 +23,11 @@ const postLogin = (data: LoginType): Promise<LoginResponseType> =>
 const SignInScreen = ({ navigation }: SignInScreenNavigationProp) => {
   const qc = useQueryClient()
   const loginMutation = useMutation(postLogin, {
-    onSuccess: async data => {
-      await qc.cancelQueries('me')
-      qc.setQueryData<LoginResponseType>('me', data)
+    onSuccess: () => {
+      qc.invalidateQueries('me')
     },
     onError: err => {
       console.log(err)
-    },
-    onSettled: () => {
-      qc.invalidateQueries('me')
     },
   })
 
@@ -40,7 +36,7 @@ const SignInScreen = ({ navigation }: SignInScreenNavigationProp) => {
   return (
     <View style={styles.container}>
       <Spinner
-        visible={true}
+        visible={loginMutation.isLoading}
         textContent={'Loading...'}
         textStyle={{ color: '#FFF' }}
       />

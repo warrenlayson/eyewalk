@@ -1,62 +1,84 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import type { RegisterBodyType } from 'api/src/routes/auth/register'
+import { useNavigation } from '@react-navigation/native'
+import { UpdateUserType } from 'api/src/routes/users/update-user'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { StyleSheet, TextInput, View } from 'react-native'
 import * as yup from 'yup'
-import Button from './Button'
+import useMe from '../hooks/useMe'
+import CheckIconButton from './CheckIconButton'
 import Input from './Input'
 
-type SignUpFormProps = {
-  onSignUp: (a: RegisterBodyType) => void
-}
 const schema = yup.object({
+  email: yup.string().email().required(),
   firstName: yup.string().required(),
   lastName: yup.string().required(),
-  email: yup.string().email().required(),
-  password: yup.string().min(6).required(),
 })
-
-const SignUpForm = ({ onSignUp }: SignUpFormProps) => {
+type Props = {
+  onEditProfile: (data: UpdateUserType) => void
+}
+export default function EditProfileForm({ onEditProfile }: Props) {
   const {
     control,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<RegisterBodyType>({
+    setValue,
+  } = useForm<UpdateUserType>({
     resolver: yupResolver(schema),
     defaultValues: {
+      email: '',
       firstName: '',
       lastName: '',
-      email: '',
-      password: '',
     },
   })
+  const me = useMe()
 
-  const passwordRef = React.useRef<TextInput>(null)
-  const onSubmit = handleSubmit(onSignUp)
+  const onSubmit = handleSubmit(onEditProfile)
 
   const lastNameRef = React.useRef<TextInput>(null)
   const emailRef = React.useRef<TextInput>(null)
+
+  const navigation = useNavigation()
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: 'Edit Profile',
+      headerRight: () => (
+        <CheckIconButton onPress={onSubmit} disabled={isSubmitting} />
+      ),
+    })
+  }, [navigation])
+
+  React.useEffect(() => {
+    if (me.data) {
+      setValue('email', me.data.email)
+      setValue('firstName', me.data.firstName)
+      setValue('lastName', me.data.lastName)
+    }
+  }, [me.data])
+
   return (
     <View>
       <Input
         label="First Name"
-        name="firstName"
         control={control}
+        name="firstName"
         autoCorrect={false}
+        autoCapitalize="none"
         returnKeyType="next"
-        blurOnSubmit={false}
         onSubmitEditing={() => lastNameRef.current?.focus()}
+        blurOnSubmit={false}
       />
       <Input
         label="Last Name"
-        name="lastName"
         ref={lastNameRef}
         control={control}
+        autoCapitalize="none"
+        name="lastName"
         autoCorrect={false}
-        blurOnSubmit={false}
         returnKeyType="next"
         onSubmitEditing={() => emailRef.current?.focus()}
+        blurOnSubmit={false}
       />
       <Input
         label="Email"
@@ -66,28 +88,10 @@ const SignUpForm = ({ onSignUp }: SignUpFormProps) => {
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}
-        returnKeyType="next"
-        onSubmitEditing={() => passwordRef.current?.focus()}
-        blurOnSubmit={false}
-      />
-      <Input
-        label="Password"
-        control={control}
-        name="password"
-        secureTextEntry
-        autoCapitalize="none"
-        autoCorrect={false}
-        ref={passwordRef}
         onSubmitEditing={onSubmit}
       />
-
-      <View style={{ marginVertical: 32 }}>
-        <Button title="Sign Up" onPress={onSubmit} disabled={isSubmitting} />
-      </View>
     </View>
   )
 }
-
-export default SignUpForm
 
 const styles = StyleSheet.create({})

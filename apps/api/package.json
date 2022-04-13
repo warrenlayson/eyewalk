@@ -7,7 +7,8 @@
     "test": "test"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seed.ts",
+    "schema": "src/db/schema.prisma"
   },
   "scripts": {
     "docker:up": "docker-compose -f ../../docker-compose.yml -f ../../docker-compose.test.yml up -d",
@@ -18,7 +19,8 @@
     "build": "tsc",
     "dev": "tsc && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"tsc -w\" \"fastify start --ignore-watch=.ts$ -w -l info -P dist/src/app.js\"",
     "lint": "eslint src --fix",
-    "migrate:test": "dotenv -e .env.test  -- yarn prisma migrate deploy"
+    "migrate:test": "dotenv -e .env.test  -- yarn prisma migrate deploy",
+    "schema:generate": "json2ts -i src/generated/ -o src/generated/"
   },
   "keywords": [],
   "author": "",
@@ -51,10 +53,12 @@
     "dotenv-cli": "^5.1.0",
     "eslint": "^8.12.0",
     "fastify-tsconfig": "^1.0.1",
+    "json-schema-to-typescript": "^10.1.5",
     "nodemon": "^2.0.15",
     "prisma": "^3.11.1",
-    "tsconfig": "*",
+    "prisma-json-schema-generator": "^2.0.8",
     "ts-node": "^10.7.0",
+    "tsconfig": "*",
     "typescript": "^4.6.3"
   }
 }

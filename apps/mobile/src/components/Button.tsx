@@ -1,26 +1,26 @@
 import React from 'react'
-import {
-  NativeSyntheticEvent,
-  NativeTouchEvent,
-  StyleSheet,
-  TouchableHighlight,
-} from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
 import Colors from '../constants/Colors'
+import useColorScheme from '../hooks/useColorScheme'
 import { Text, View } from './Themed'
 
 type ButtonProps = {
   title: string
-  onPress: (ev: NativeSyntheticEvent<NativeTouchEvent>) => void
-  disabled?: boolean | undefined
-}
+} & React.ComponentPropsWithRef<typeof Pressable>
 
-const Button = ({ onPress, title, disabled }: ButtonProps) => {
+const Button = ({ title, disabled, ...rest }: ButtonProps) => {
+  const colorScheme = useColorScheme()
   return (
-    <TouchableHighlight onPress={onPress} disabled={disabled}>
+    <Pressable
+      {...rest}
+      style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+    >
       <View style={styles.button}>
-        <Text style={[styles.buttonText]}>{title}</Text>
+        <Text style={[styles.buttonText, { color: Colors[colorScheme].text }]}>
+          {title}
+        </Text>
       </View>
-    </TouchableHighlight>
+    </Pressable>
   )
 }
 
@@ -29,13 +29,14 @@ export default Button
 const styles = StyleSheet.create({
   button: {
     backgroundColor: Colors.light.primary,
-    height: 50,
     justifyContent: 'center',
-    borderRadius: 4,
+    minHeight: 48,
+    minWidth: 48,
+    borderRadius: 10,
     fontWeight: '500',
+    padding: 10,
   },
   buttonText: {
     textAlign: 'center',
-    color: Colors.light.text,
   },
 })

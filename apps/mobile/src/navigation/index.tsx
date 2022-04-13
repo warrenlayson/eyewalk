@@ -13,11 +13,13 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as React from 'react'
 import { ColorSchemeName, Pressable } from 'react-native'
+import Spinner from 'react-native-loading-spinner-overlay/lib'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
 import useMe from '../hooks/useMe'
-import useRefreshOnFocus from '../hooks/useRefreshOnFocus'
+import AddDeviceScreen from '../screens/AddDeviceScreen'
 import DashboardScreen from '../screens/DashboardScreen'
+import DeviceDetailScreen from '../screens/DeviceDetailScreen'
 import EditProfileScreen from '../screens/EditProfileScreen'
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen'
 import ModalScreen from '../screens/ModalScreen'
@@ -58,41 +60,21 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 
 function RootNavigator() {
   // Mock signed in
-  const { data, refetch } = useMe()
+  const { data: user, isLoading, isSuccess } = useMe()
 
-  useRefreshOnFocus(refetch)
+  const isLoggedIn = isSuccess && user !== undefined
 
-  console.log(data)
+  console.log('is logged in', isLoggedIn)
 
-  // const [data] = React.useState(false)
+  if (isLoading) {
+    return (
+      <Spinner visible textContent="Loading..." textStyle={{ color: '#fff' }} />
+    )
+  }
 
   return (
     <Stack.Navigator>
-      {data ? (
-        <>
-          <Stack.Screen
-            name="Root"
-            component={BottomTabNavigator}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="Settings" component={SettingsScreen} />
-          <Stack.Screen
-            name="EditProfile"
-            component={EditProfileScreen}
-            options={() => ({
-              title: 'Edit Profile',
-            })}
-          />
-          <Stack.Screen
-            name="NotFound"
-            component={NotFoundScreen}
-            options={{ title: 'Oops!' }}
-          />
-          <Stack.Group screenOptions={{ presentation: 'modal' }}>
-            <Stack.Screen name="Modal" component={ModalScreen} />
-          </Stack.Group>
-        </>
-      ) : (
+      {!isLoggedIn ? (
         <>
           <Stack.Screen
             name="SignIn"
@@ -113,6 +95,45 @@ function RootNavigator() {
               headerShown: false,
             }}
           />
+        </>
+      ) : (
+        <>
+          <Stack.Screen
+            name="Root"
+            component={BottomTabNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen
+            name="EditProfile"
+            component={EditProfileScreen}
+            options={() => ({
+              title: 'Edit Profile',
+              presentation: 'formSheet',
+            })}
+          />
+          <Stack.Screen
+            name="AddDevice"
+            component={AddDeviceScreen}
+            options={{
+              title: 'Add Device',
+              presentation: 'formSheet',
+            }}
+          />
+
+          <Stack.Screen
+            name="DeviceDetail"
+            component={DeviceDetailScreen}
+            options={{ title: 'Device Detail' }}
+          />
+          <Stack.Screen
+            name="NotFound"
+            component={NotFoundScreen}
+            options={{ title: 'Oops!' }}
+          />
+          <Stack.Group screenOptions={{ presentation: 'modal' }}>
+            <Stack.Screen name="Modal" component={ModalScreen} />
+          </Stack.Group>
         </>
       )}
     </Stack.Navigator>

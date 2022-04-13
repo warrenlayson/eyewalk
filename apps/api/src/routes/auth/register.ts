@@ -1,5 +1,6 @@
 import { Static, Type } from '@sinclair/typebox'
-import { FastifyPluginAsync } from 'fastify'
+import { FastifyInstance, FastifyPluginAsync } from 'fastify'
+import { UserNoPassword } from '../users/types'
 
 const RegisterBody = Type.Object({
   firstName: Type.String({ minLength: 1, maxLength: 70 }),
@@ -10,28 +11,34 @@ const RegisterBody = Type.Object({
 
 export type RegisterBodyType = Static<typeof RegisterBody>
 
-const register: FastifyPluginAsync = async fastify => {
+const RegisterResponse = UserNoPassword
+
+export type RegisterResponseType = Static<typeof RegisterResponse>
+
+const register: FastifyPluginAsync = async (fastify: FastifyInstance) => {
   fastify.post<{
     Body: RegisterBodyType
+    Reply: RegisterResponseType
   }>(
     '/register',
     {
       schema: {
         body: RegisterBody,
+        response: {
+          201: RegisterResponse,
+        },
       },
     },
-    async function (request, reply) {
+    async request => {
       const { firstName, email, lastName, password } = request.body
 
       const existingUser = await fastify.prisma.user.findUnique({
         where: { email },
       })
 
-      if (existingUser) {
-        return reply.badRequest('User already exists')
-      }
+      fastify.assert.ok(existingUser, 400, 'User already exists')
 
-      const hashedPassword = await this.argon2.hash(password)
+      const hashedPassword = await fastify.argon2.hash(password)
 
       const user = await fastify.prisma.user.create({
         data: {
@@ -43,7 +50,7 @@ const register: FastifyPluginAsync = async fastify => {
       })
 
       request.session.user = user.id
-      return reply.replyUser(this.exclude(user, 'password'))
+      return fastify.exclude(user, 'password')
     },
   )
 }

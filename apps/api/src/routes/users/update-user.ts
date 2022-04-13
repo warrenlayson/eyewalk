@@ -1,57 +1,54 @@
 import { Static, Type } from '@sinclair/typebox'
-import { FastifyPluginAsync } from 'fastify'
-import { User } from './types'
+import type { FastifyInstance, FastifyPluginAsync } from 'fastify'
+import { User, UserNoPassword, UserWithoutPasswordType } from './types'
 
 const UpdateUser = Type.Omit(User, ['id', 'role', 'password'])
 
 export type UpdateUserType = Static<typeof UpdateUser>
 
 const Params = Type.Object({
-  id: Type.Number(),
+  id: Type.String({ format: 'uuid' }),
 })
 
 type ParamsType = Static<typeof Params>
 
-const updateUser: FastifyPluginAsync = async fastify => {
+const updateUser: FastifyPluginAsync = async (fastify: FastifyInstance) => {
   fastify.put<{
     Body: UpdateUserType
     Params: ParamsType
+    Reply: UserWithoutPasswordType
   }>(
     '/:id',
     {
       schema: {
         body: UpdateUser,
         params: Params,
+        response: {
+          200: UserNoPassword,
+        },
       },
     },
     async request => {
       const { id } = request.params
-      try {
-        const user = await fastify.prisma.user.findUnique({
-          where: { id },
-        })
+      const user = await fastify.prisma.user.findUnique({
+        where: { id },
+      })
 
-        if (!user) {
-          return fastify.httpErrors.notFound()
-        }
+      fastify.assert.ok(user, 404, `User not found with id: ${id}`)
 
-        const updatedUser = await fastify.prisma.user.update({
-          where: { id },
-          data: request.body,
-          select: {
-            id: true,
-            firstName: true,
-            email: true,
-            lastName: true,
-            role: true,
-          },
-        })
+      const updatedUser = await fastify.prisma.user.update({
+        where: { id },
+        data: request.body,
+        select: {
+          id: true,
+          firstName: true,
+          email: true,
+          lastName: true,
+          role: true,
+        },
+      })
 
-        return updatedUser
-      } catch (e) {
-        fastify.log.error(e)
-        return fastify.httpErrors.internalServerError()
-      }
+      return updatedUser
     },
   )
 }
