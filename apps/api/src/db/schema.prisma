@@ -39,6 +39,9 @@ model DeviceMetadata {
   responseTime Int
   device       Device?
   caneUser     CaneUser?
+  x            Float     @default(0)
+  y            Float     @default(0)
+  z            Float     @default(0)
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @default(now()) @updatedAt @db.Timestamp
