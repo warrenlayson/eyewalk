@@ -85,6 +85,14 @@
           "type": "number",
           "default": 0
         },
+        "baseLatitude": {
+          "type": "number",
+          "default": 0
+        },
+        "baseLongitude": {
+          "type": "number",
+          "default": 0
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time"

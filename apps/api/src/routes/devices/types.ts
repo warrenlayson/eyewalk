@@ -23,6 +23,14 @@ export const DevicePutBody = Type.Object(
         x: Type.Optional(Type.Number()),
         y: Type.Optional(Type.Number()),
         z: Type.Optional(Type.Number()),
+        baseLongitude: Type.Optional(Type.Number()),
+        baseLatitude: Type.Optional(Type.Number()),
+        caneUser: Type.Optional(
+          Type.Object({
+            firstName: Type.Optional(Type.String()),
+            lastName: Type.Optional(Type.String()),
+          }),
+        ),
       }),
     ),
   },
@@ -52,6 +60,8 @@ const DeviceMetadata = Type.Object({
   x: Type.Number(),
   y: Type.Number(),
   z: Type.Number(),
+  baseLongitude: Type.Number(),
+  baseLatitude: Type.Number(),
   createdAt: Type.String({ format: 'date-time' }),
   updatedAt: Type.String({ format: 'date-time' }),
 })
@@ -59,7 +69,7 @@ const DeviceMetadata = Type.Object({
 const DeviceMetadataWithCaneUser = Type.Intersect([
   DeviceMetadata,
   Type.Object({
-    caneUser: Type.Union([CaneUser, Type.Null()]),
+    caneUser: CaneUser,
   }),
 ])
 

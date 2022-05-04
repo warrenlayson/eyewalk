@@ -41,7 +41,14 @@ const updateDevice: FastifyPluginAsync = async (
           bounded,
           description,
           metadata: {
-            update: metadata,
+            update: {
+              ...metadata,
+              caneUser: {
+                update: {
+                  ...metadata?.caneUser,
+                },
+              },
+            },
           },
         },
         include: {

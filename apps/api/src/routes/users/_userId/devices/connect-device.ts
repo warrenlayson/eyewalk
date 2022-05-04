@@ -42,7 +42,7 @@ const connectDevice: FastifyPluginAsync = async (
 
       fastify.assert.ok(device, 404, `Device not found with id: ${id}`)
 
-      const { firstName, lastName } = request.body
+      const { firstName, lastName, responseTime } = request.body
 
       const updatedDevice = await fastify.prisma.device.update({
         where: {
@@ -57,6 +57,7 @@ const connectDevice: FastifyPluginAsync = async (
           },
           metadata: {
             update: {
+              responseTime,
               caneUser: {
                 create: {
                   firstName,
