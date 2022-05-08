@@ -1,6 +1,6 @@
 import { Static } from '@sinclair/typebox'
 import { FastifyPluginAsync } from 'fastify'
-import fastifyAuth from 'fastify-auth'
+import fastifyAuth from '@fastify/auth'
 import { UserNoPassword } from '../users/types'
 
 const CurrentUser = UserNoPassword

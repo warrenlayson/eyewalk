@@ -1,7 +1,7 @@
 import { FastifyPluginAsync } from 'fastify'
-import AutoLoad, { AutoloadPluginOptions } from 'fastify-autoload'
-import fastifyCors from 'fastify-cors'
-import fastifyHelmet from 'fastify-helmet'
+import AutoLoad, { AutoloadPluginOptions } from '@fastify/autoload'
+import fastifyCors from '@fastify/cors'
+import fastifyHelmet from '@fastify/helmet'
 import { join } from 'path'
 
 export type AppOptions = {

@@ -7,7 +7,7 @@ import { StyleSheet, TextInput, View } from 'react-native'
 import * as yup from 'yup'
 import useMe from '../hooks/useMe'
 import CheckIconButton from './CheckIconButton'
-import Input from './Input'
+import FormInput from './FormInput'
 
 const schema = yup.object({
   email: yup.string().email().required(),
@@ -23,6 +23,7 @@ export default function EditProfileForm({ onEditProfile }: Props) {
     handleSubmit,
     formState: { isSubmitting },
     setValue,
+    reset,
   } = useForm<UpdateUserType>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -51,15 +52,17 @@ export default function EditProfileForm({ onEditProfile }: Props) {
 
   React.useEffect(() => {
     if (me.data) {
-      setValue('email', me.data.email)
-      setValue('firstName', me.data.firstName)
-      setValue('lastName', me.data.lastName)
+      reset({
+        email: me.data.email,
+        firstName: me.data.firstName,
+        lastName: me.data.lastName,
+      })
     }
   }, [me.data])
 
   return (
     <View>
-      <Input
+      <FormInput
         label="First Name"
         control={control}
         name="firstName"
@@ -69,7 +72,7 @@ export default function EditProfileForm({ onEditProfile }: Props) {
         onSubmitEditing={() => lastNameRef.current?.focus()}
         blurOnSubmit={false}
       />
-      <Input
+      <FormInput
         label="Last Name"
         ref={lastNameRef}
         control={control}
@@ -80,7 +83,7 @@ export default function EditProfileForm({ onEditProfile }: Props) {
         onSubmitEditing={() => emailRef.current?.focus()}
         blurOnSubmit={false}
       />
-      <Input
+      <FormInput
         label="Email"
         ref={emailRef}
         control={control}

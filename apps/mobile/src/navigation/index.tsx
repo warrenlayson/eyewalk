@@ -20,6 +20,7 @@ import useMe from '../hooks/useMe'
 import AddDeviceScreen from '../screens/AddDeviceScreen'
 import DashboardScreen from '../screens/DashboardScreen'
 import DeviceDetailScreen from '../screens/DeviceDetailScreen'
+import EditDeviceScreen from '../screens/EditDeviceScreen'
 import EditProfileScreen from '../screens/EditProfileScreen'
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen'
 import ModalScreen from '../screens/ModalScreen'
@@ -27,6 +28,7 @@ import NotFoundScreen from '../screens/NotFoundScreen'
 import NotificationScreen from '../screens/NotificationScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import SearchScreen from '../screens/SearchScreen'
+import SetAddressScreen from '../screens/SetAddressScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import SignInScreen from '../screens/SignInScreen'
 import SignUpScreen from '../screens/SignUpScreen'
@@ -126,6 +128,22 @@ function RootNavigator() {
             component={DeviceDetailScreen}
             options={{ title: 'Device Detail' }}
           />
+
+          <Stack.Screen
+            name="EditDevice"
+            component={EditDeviceScreen}
+            options={{ title: 'Edit Device' }}
+          />
+
+          <Stack.Screen
+            name="SetAddress"
+            component={SetAddressScreen}
+            options={{
+              title: '',
+              headerTransparent: true,
+            }}
+          />
+
           <Stack.Screen
             name="NotFound"
             component={NotFoundScreen}

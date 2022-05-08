@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { StyleSheet, TextInput, View } from 'react-native'
 import * as yup from 'yup'
 import Button from './Button'
-import Input from './Input'
+import FormInput from './FormInput'
 import Link from './Link'
 
 type SignInFormProps = {
@@ -37,7 +37,7 @@ const SignInForm = ({ onSignIn, onForgotPassword }: SignInFormProps) => {
   })
   return (
     <View>
-      <Input
+      <FormInput
         label="Email"
         control={control}
         name="email"
@@ -49,7 +49,7 @@ const SignInForm = ({ onSignIn, onForgotPassword }: SignInFormProps) => {
         onSubmitEditing={() => passwordRef.current?.focus()}
         blurOnSubmit={false}
       />
-      <Input
+      <FormInput
         label="Password"
         control={control}
         name="password"

@@ -10,9 +10,12 @@ const Params = Type.Object({
 
 type ParamsType = Static<typeof Params>
 
+
+
 const updateDevice: FastifyPluginAsync = async (
   fastify: FastifyInstance,
 ): Promise<void> => {
+
   fastify.put<{
     Params: ParamsType
     Body: DevicePutBodyType

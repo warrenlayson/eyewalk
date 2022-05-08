@@ -8,7 +8,10 @@ import { View } from './Themed'
 export default function CheckIconButton(props: PressableProps) {
   const colorScheme = useColorScheme()
   return (
-    <Pressable {...props}>
+    <Pressable
+      {...props}
+      style={({ pressed }) => ({ opacity: pressed ? 0.5 : 1 })}
+    >
       <View>
         <FontAwesome name="check" color={Colors[colorScheme].text} size={20} />
       </View>

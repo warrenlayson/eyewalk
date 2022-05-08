@@ -1,6 +1,6 @@
 import fastifySession from '@fastify/session'
 import connectRedis from 'connect-redis'
-import cookie from 'fastify-cookie'
+import cookie from '@fastify/cookie'
 import fp from 'fastify-plugin'
 import Redis from 'ioredis'
 import { COOKIE_NAME, PROD } from '../constants'

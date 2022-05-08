@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import { AppStateStatus, Platform } from 'react-native'
+import 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { focusManager, QueryClient, QueryClientProvider } from 'react-query'
 import useAppState from './src/hooks/useAppState'
