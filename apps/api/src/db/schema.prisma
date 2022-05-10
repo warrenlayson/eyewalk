@@ -26,6 +26,7 @@ model User {
   email     String   @unique @db.VarChar(70)
   password  String   @db.Text
   role      Role     @default(Customer)
+  pushToken String?  @db.Text
   Device    Device[]
 }
 
@@ -48,6 +49,7 @@ model DeviceMetadata {
   z             Float     @default(0)
   baseLatitude  Float     @default(0)
   baseLongitude Float     @default(0)
+  maxDistance   Int       @default(5)
 
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @default(now()) @updatedAt @db.Timestamp

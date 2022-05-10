@@ -25,6 +25,7 @@ export const DevicePutBody = Type.Object(
         z: Type.Optional(Type.Number()),
         baseLongitude: Type.Optional(Type.Number()),
         baseLatitude: Type.Optional(Type.Number()),
+        maxDistance: Type.Optional(Type.Number()),
         caneUser: Type.Optional(
           Type.Object({
             firstName: Type.Optional(Type.String()),

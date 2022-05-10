@@ -1,8 +1,16 @@
+import { Role } from '@prisma/client'
 import { Static, Type } from '@sinclair/typebox'
 import type { FastifyInstance, FastifyPluginAsync } from 'fastify'
-import { User, UserNoPassword, UserWithoutPasswordType } from './types'
+import { UserNoPassword, UserWithoutPasswordType } from './types'
 
-const UpdateUser = Type.Omit(User, ['id', 'role', 'password'])
+const UpdateUser = Type.Object({
+  firstName: Type.Optional(Type.String({ minLength: 1, maxLength: 70 })),
+  lastName: Type.Optional(Type.String({ minLength: 1, maxLength: 70 })),
+  email: Type.Optional(Type.String({ format: 'email' })),
+  password: Type.Optional(Type.String()),
+  role: Type.Optional(Type.Enum(Role)),
+  pushToken: Type.Optional(Type.String()),
+})
 
 export type UpdateUserType = Static<typeof UpdateUser>
 
@@ -36,9 +44,26 @@ const updateUser: FastifyPluginAsync = async (fastify: FastifyInstance) => {
 
       fastify.assert.ok(user, 404, `User not found with id: ${id}`)
 
+      // get pushToken from user
+      const { pushToken } = user
+      const data = request.body
+      let arrayOfPushTokens: string[] = []
+
+      if (data.pushToken) {
+        if (pushToken) {
+          arrayOfPushTokens = pushToken.split(', ')
+        }
+        if (!arrayOfPushTokens.includes(data.pushToken)) {
+          arrayOfPushTokens.push(data.pushToken)
+        }
+      }
+
       const updatedUser = await fastify.prisma.user.update({
         where: { id },
-        data: request.body,
+        data: {
+          ...data,
+          pushToken: arrayOfPushTokens.join(', '),
+        },
         select: {
           id: true,
           firstName: true,

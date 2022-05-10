@@ -9,6 +9,7 @@ Table User {
   email String [unique, not null]
   password String [not null]
   role Role [not null, default: 'Customer']
+  pushToken String
   Device Device [not null]
 }
 
@@ -26,6 +27,7 @@ Table DeviceMetadata {
   z Float [not null, default: 0]
   baseLatitude Float [not null, default: 0]
   baseLongitude Float [not null, default: 0]
+  maxDistance Int [not null, default: 5]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [default: `now()`, not null]
 }

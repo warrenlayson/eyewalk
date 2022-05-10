@@ -24,6 +24,9 @@
           "default": "Customer",
           "enum": ["Admin", "Customer"]
         },
+        "pushToken": {
+          "type": ["string", "null"]
+        },
         "Device": {
           "type": "array",
           "items": {
@@ -92,6 +95,10 @@
         "baseLongitude": {
           "type": "number",
           "default": 0
+        },
+        "maxDistance": {
+          "type": "integer",
+          "default": 5
         },
         "createdAt": {
           "type": "string",

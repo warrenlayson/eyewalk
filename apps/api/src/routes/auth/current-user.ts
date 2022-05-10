@@ -1,6 +1,6 @@
+import fastifyAuth from '@fastify/auth'
 import { Static } from '@sinclair/typebox'
 import { FastifyPluginAsync } from 'fastify'
-import fastifyAuth from '@fastify/auth'
 import { UserNoPassword } from '../users/types'
 
 const CurrentUser = UserNoPassword
@@ -28,10 +28,11 @@ const currentUser: FastifyPluginAsync = async (fastify): Promise<void> => {
             role: true,
             firstName: true,
             lastName: true,
+            pushToken: true,
           },
         })
 
-        reply.replyUser(user!)
+        reply.send(user!)
       },
     )
   })
