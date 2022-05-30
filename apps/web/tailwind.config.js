@@ -25,6 +25,14 @@ module.exports = {
         '2xl': '1024px',
       },
     },
+    content: {
+      'old-people': 'url("/images/old.people.png")',
+      'group-27': 'url("/images/group.27.png")',
+    },
+    backgroundImage: {
+      'old-people':
+        'url("/images/old.people.png"), url("/images/group.27.png")',
+    },
   },
   plugins: [],
 }

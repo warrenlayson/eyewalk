@@ -30,13 +30,13 @@
     "jest": "^27.5.1",
     "lint-staged": "^12.3.4",
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "turbo": "^1.2.8"
   },
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
   },
-  "packageManager": "yarn@1.23.0-20220130.1630",
+  "packageManager": "yarn@1.22.18",
   "lint-staged": {
     "apps/**/*.{js,ts,jsx,tsx}": [
       "eslint"
@@ -44,8 +44,5 @@
     "*.json": [
       "prettier --write"
     ]
-  },
-  "dependencies": {
-    "dotenv-safe": "^8.2.0"
   }
 }

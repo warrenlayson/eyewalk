@@ -1,7 +1,12 @@
-module.exports = {
+const nextJest = require('next/jest')
+
+const createJestConfig = nextJest({
+  dir: './',
+})
+
+const customJestConfig = {
   ...require('config/jest-next'),
   rootDir: '.',
-  moduleNameMapper: {
-    '\\.module\\.css$': 'identity-obj-proxy',
-  },
 }
+
+module.exports = createJestConfig(customJestConfig)

@@ -1,22 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar'
+import { AppStateStatus, Platform } from 'react-native'
+import 'react-native-gesture-handler'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { focusManager, QueryClient, QueryClientProvider } from 'react-query'
+import useAppState from './src/hooks/useAppState'
+import useCachedResources from './src/hooks/useCachedResources'
+import useColorScheme from './src/hooks/useColorScheme'
+import { useOnlineManager } from './src/hooks/useOnlineManager'
+import Navigation from './src/navigation'
 
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+function onAppStateChange(status: AppStateStatus) {
+  if (Platform.OS !== 'web') {
+    focusManager.setFocused(status === 'active')
+  }
+}
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: 2 } },
+})
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+  const isLoadingComplete = useCachedResources()
+  const colorScheme = useColorScheme()
+  useOnlineManager()
+
+  useAppState(onAppStateChange)
 
   if (!isLoadingComplete) {
-    return null;
+    return null
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
-    );
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaProvider>
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </SafeAreaProvider>
+      </QueryClientProvider>
+    )
   }
 }

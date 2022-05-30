@@ -1,0 +1,14 @@
+{
+  "extends": "tsconfig/server.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "sourceMap": true,
+    "strict": true,
+    "lib": ["ESNext"],
+    "esModuleInterop": true,
+    "rootDir": ".",
+    "resolveJsonModule": true
+  },
+  "include": ["src", "generated/**/*.d.ts"],
+  "exclude": ["node_modules", "dist", ".turbo", "coverage"]
+}

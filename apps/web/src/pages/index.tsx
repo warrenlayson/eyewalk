@@ -18,7 +18,11 @@ const Index = () => (
     </Head>
     {/* Header */}
     <header>
-      <nav className="container flex items-center py-4">
+      <div className="absolute top-0 right-0 z-0  h-[40em] hidden lg:block w-[55em]">
+        <div className="w-full h-full bg-cover bg-old-people bg-blend-overlay " />
+        {/* <div className="bg-[url('/images/group.27.png')] w-full h-full bg-cover " /> */}
+      </div>
+      <nav className="container relative z-10 flex items-center py-4">
         <div className="py-1">
           <Link href="/">
             <a>
@@ -56,12 +60,12 @@ const Index = () => (
         {/* Content */}
         <div className="flex flex-col items-center flex-1 lg:items-start">
           <h2 className="mb-6 text-3xl text-center font-header text-eyewalk-navy-blue md:text-4 lg:text-5xl lg:text-left">
-            header
+            About Us
           </h2>
           <p className="mb-6 text-lg text-center text-eyewalk-black lg:text-left">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro non
-            quis modi, pariatur vitae harum. Odio laboriosam eos maiores ipsum
-            recusandae quis, vitae totam soluta, autem quasi minus facere quas.
+            Using a modern technique and technology advancement, our product
+            offers the development of a new generation of smart walking canes
+            built with innovative features
           </p>
           <div className="flex flex-wrap justify-center gap-6">
             <Button color="yellow">Get Started</Button>
@@ -69,11 +73,13 @@ const Index = () => (
           </div>
         </div>
         {/* Image */}
-        <div className="z-10 flex justify-center flex-1 mb-10 md:mb-16 lg:mb-0">
+        <div className="z-10 flex justify-center flex-1 mb-10 rounded-full md:mb-16 lg:mb-0 ">
           {/* Replace with actual image */}
-          <div className="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full">
-            insert image
-          </div>
+          <img
+            src="/images/Group 2.png"
+            alt="cane"
+            className="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full"
+          />
         </div>
       </div>
     </section>
@@ -82,14 +88,13 @@ const Index = () => (
     <section className="py-20 mt-20 bg-eyewalk-white lg:mt-60">
       {/* Heading */}
       <div className="px-2 mx-auto sm:w-3/4 lg:w-5/12">
-        <h2 className="text-3xl text-center font-header text-eyewalk-navy-blue">
+        <h2 className="text-3xl text-center uppercase font-header text-eyewalk-navy-blue">
           Features
         </h2>
         <p className="mt-4 text-center text-gray-500">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo
-          voluptatum inventore laudantium accusantium dolor tenetur? Doloremque
-          nihil exercitationem eaque provident nesciunt impedit fugit, accusamus
-          ipsam magni deleniti facilis fugiat hic.
+          Providing intelligent navigation for the visually impaired has become
+          simpler as a result of substantial technology improvements in both
+          hardware and software
         </p>
       </div>
       {/* Feature 1 */}
@@ -98,20 +103,23 @@ const Index = () => (
           {/* Image */}
           <div className="z-10 flex justify-center flex-1 mb-10 lg:mb-0">
             {/* Replace with image */}
-            <div className="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full">
-              insert image
-            </div>
+            <img
+              className="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full"
+              src="/images/image.4.png"
+              alt=""
+            />
           </div>
           {/* Content */}
           <div className="flex flex-col items-center flex-1 lg:items-start">
-            <h2 className="text-3xl font-header text-eyewalk-navy-blue">
-              Feature 1
+            <h2 className="text-3xl font-bold uppercase font-header text-eyewalk-navy-blue">
+              Pulse Monitor
             </h2>
             <p className="my-4 text-center text-gray-500 lg:text-left sm:w-3/4 lg:w-full">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-              deserunt quos placeat accusamus, molestias eveniet, architecto,
-              tempore earum obcaecati temporibus quasi quisquam labore odio quae
-              vero! Corrupti veniam quibusdam aliquam.
+              the Smart Walking Cane&lsquo;s pulse rate sensor is essential, as
+              monitoring an elderly person&lsquo;s heart rate while walking is
+              vital for their health and their family&lsquo;s ability to react
+              promptly in the event of an emergency. Knowing their heart rate
+              enables them to detect developing medical problems
             </p>
             <Button color="yellow">Learn more</Button>
           </div>
@@ -123,20 +131,24 @@ const Index = () => (
           {/* Image */}
           <div className="z-10 flex justify-center flex-1 mb-10 lg:mb-0">
             {/* Replace with image */}
-            <div className="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full">
-              insert image
-            </div>
+            <img
+              className="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full"
+              src="/images/feature.2.png"
+              alt="Obstacle & Fail Detection"
+            />
           </div>
           {/* Content */}
           <div className="flex flex-col items-center flex-1 lg:items-start">
-            <h2 className="text-3xl font-header text-eyewalk-navy-blue">
-              Feature 2
+            <h2 className="text-3xl font-bold uppercase font-header text-eyewalk-navy-blue">
+              Obstacle & Fail Detection
             </h2>
             <p className="my-4 text-center text-gray-500 lg:text-left sm:w-3/4 lg:w-full">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-              deserunt quos placeat accusamus, molestias eveniet, architecto,
-              tempore earum obcaecati temporibus quasi quisquam labore odio quae
-              vero! Corrupti veniam quibusdam aliquam.
+              By introducing advanced sensors into the architecture of the Smart
+              Walking cane to create a functional system that avoid obstacles
+              and alerts the user to potential dangers in their path, along with
+              the fail detection system, accidents can be avoided or, in some
+              cases, aided through the use of an alert structure that sends a
+              notification tot he client&lsquo;s relative or guardian
             </p>
             <Button color="yellow">Learn more</Button>
           </div>
@@ -148,20 +160,98 @@ const Index = () => (
           {/* Image */}
           <div className="z-10 flex justify-center flex-1 mb-10 lg:mb-0">
             {/* Replace with image */}
-            <div className="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full">
-              insert image
-            </div>
+            <img
+              src="/images/feature.3.png"
+              alt=""
+              className="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full"
+            />
           </div>
           {/* Content */}
           <div className="flex flex-col items-center flex-1 lg:items-start">
-            <h2 className="text-3xl font-header text-eyewalk-navy-blue">
-              Feature 3
+            <h2 className="text-3xl font-bold uppercase font-header text-eyewalk-navy-blue">
+              Speaker or earphone connectivity
             </h2>
             <p className="my-4 text-center text-gray-500 lg:text-left sm:w-3/4 lg:w-full">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
               deserunt quos placeat accusamus, molestias eveniet, architecto,
               tempore earum obcaecati temporibus quasi quisquam labore odio quae
               vero! Corrupti veniam quibusdam aliquam.
+            </p>
+            <Button color="yellow">Learn more</Button>
+          </div>
+        </div>
+      </div>
+      {/* Feature 4 */}
+      <div className="relative mt-20 lg:mt-24">
+        <div className="container flex flex-col items-center justify-center lg:flex-row-reverse gap-x-24">
+          {/* Image */}
+          <div className="z-10 flex justify-center flex-1 mb-10 lg:mb-0">
+            {/* Replace with image */}
+            <img
+              src="/images/feature.3.png"
+              alt=""
+              className="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full"
+            />
+          </div>
+          {/* Content */}
+          <div className="flex flex-col items-center flex-1 lg:items-start">
+            <h2 className="text-3xl font-bold uppercase font-header text-eyewalk-navy-blue">
+              Location Tracking
+            </h2>
+            <p className="my-4 text-center text-gray-500 lg:text-left sm:w-3/4 lg:w-full">
+              The tracking implant offers information about the exact location
+              of the person, allowing it to relay specifics on where the person
+              is at any given time
+            </p>
+            <Button color="yellow">Learn more</Button>
+          </div>
+        </div>
+      </div>
+      {/* Feature 5 */}
+      <div className="relative mt-20 lg:mt-24">
+        <div className="container flex flex-col items-center justify-center lg:flex-row gap-x-24">
+          {/* Image */}
+          <div className="z-10 flex justify-center flex-1 mb-10 lg:mb-0">
+            {/* Replace with image */}
+            <img
+              src="/images/feature.3.png"
+              alt=""
+              className="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full"
+            />
+          </div>
+          {/* Content */}
+          <div className="flex flex-col items-center flex-1 lg:items-start">
+            <h2 className="text-3xl font-bold uppercase font-header text-eyewalk-navy-blue">
+              Voice Assistance
+            </h2>
+            <p className="my-4 text-center text-gray-500 lg:text-left sm:w-3/4 lg:w-full">
+              Voice assistance is provided through loudspeakers and earphones
+            </p>
+            <Button color="yellow">Learn more</Button>
+          </div>
+        </div>
+      </div>
+      {/* Feature 6 */}
+      <div className="relative mt-20 lg:mt-24">
+        <div className="container flex flex-col items-center justify-center lg:flex-row-reverse gap-x-24">
+          {/* Image */}
+          <div className="z-10 flex justify-center flex-1 mb-10 lg:mb-0">
+            {/* Replace with image */}
+            <img
+              src="/images/feature.3.png"
+              alt=""
+              className="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full"
+            />
+          </div>
+          {/* Content */}
+          <div className="flex flex-col items-center flex-1 lg:items-start">
+            <h2 className="text-3xl font-bold uppercase font-header text-eyewalk-navy-blue">
+              Walking cane portability
+            </h2>
+            <p className="my-4 text-center text-gray-500 lg:text-left sm:w-3/4 lg:w-full">
+              They cane can be used at any time and from any time and from any
+              locatoin, with battery life lasting at least three hours at the
+              most.
             </p>
             <Button color="yellow">Learn more</Button>
           </div>

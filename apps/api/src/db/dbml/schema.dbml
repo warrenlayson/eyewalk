@@ -1,0 +1,62 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id String [pk]
+  firstName String [not null]
+  lastName String [not null]
+  email String [unique, not null]
+  password String [not null]
+  role Role [not null, default: 'Customer']
+  pushToken String
+  Device Device [not null]
+}
+
+Table DeviceMetadata {
+  id String [pk]
+  latitude Float [not null]
+  longitude Float [not null]
+  pulse Int [not null]
+  batteryLevel Int [not null]
+  responseTime Int [not null]
+  device Device
+  caneUser CaneUser
+  x Float [not null, default: 0]
+  y Float [not null, default: 0]
+  z Float [not null, default: 0]
+  baseLatitude Float [not null, default: 0]
+  baseLongitude Float [not null, default: 0]
+  maxDistance Int [not null, default: 5]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table CaneUser {
+  id String [pk]
+  firstName String [not null]
+  lastName String [not null]
+  deviceMetadataId String [unique, not null]
+  DeviceMetadata DeviceMetadata [not null]
+}
+
+Table Device {
+  id String [pk]
+  description String [not null]
+  bounded Boolean [not null, default: false]
+  owner User
+  metadata DeviceMetadata [not null]
+  ownerId String
+  deviceMetadataId String [unique, not null]
+}
+
+Enum Role {
+  Admin
+  Customer
+}
+
+Ref: CaneUser.deviceMetadataId - DeviceMetadata.id
+
+Ref: Device.ownerId > User.id
+
+Ref: Device.deviceMetadataId - DeviceMetadata.id
